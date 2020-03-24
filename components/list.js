@@ -21,7 +21,7 @@ export default function MovieList() {
     <View>
       <Image
         source={require('../assets/MR_logo.png')}
-        style={styles.lgo}
+        style={styles.logo}
         resizeMode="contain"
       />
       <FlatList
