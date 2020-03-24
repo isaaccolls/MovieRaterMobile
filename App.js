@@ -1,9 +1,21 @@
 import React from 'react';
-// import { View } from 'react-native';
 import MovieList from './components/list';
+import Detail from './components/detail';
 
-export default function App() {
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const AppNavigator = createStackNavigator();
+
+function App() {
   return (
-    <MovieList />
+    <NavigationContainer>
+      <AppNavigator.Navigator>
+        <AppNavigator.Screen name="MovieList" component={MovieList} />
+        <AppNavigator.Screen name="Detail" component={Detail} />
+      </AppNavigator.Navigator>
+    </NavigationContainer>
   );
 }
+
+export default App;
