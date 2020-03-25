@@ -54,10 +54,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     height: 50,
-    backgroundColor: '#282C35',
+    backgroundColor: '#282c35',
   },
   itemText: {
-    color: '#FFFFFF',
+    color: '#fff',
     fontSize: 24,
   },
   logo: {
