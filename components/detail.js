@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 export default function Detail({ route, navigation }) {
@@ -14,7 +14,13 @@ export default function Detail({ route, navigation }) {
     headerTitleStyle: {
       fontWeight: 'bold',
       fontSize: 18,
-    }
+    },
+    headerRight: () => (
+      <Button
+        title="Edit"
+        color="#fff"
+        onPress={() => navigation.navigate("Edit", {movie: movie})}/>
+    ),
   });
 
   return (
