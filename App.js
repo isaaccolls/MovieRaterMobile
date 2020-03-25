@@ -5,6 +5,8 @@ import Detail from './components/detail';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import './assets/fontawesome';
+
 const AppNavigator = createStackNavigator();
 
 function App() {
