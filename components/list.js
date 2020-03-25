@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
 
-export default function MovieList() {
+export default function MovieList({ navigation }) {
 
   const [ movies, setMovies ] = useState([]);
 
@@ -17,6 +17,10 @@ export default function MovieList() {
     .catch(error => console.error(error));
   }, []);
 
+  const movieclicked = (movie) => {
+    navigation.navigate("Detail", {movie: movie});
+  };
+
   return (
     <View>
       <Image
@@ -27,9 +31,11 @@ export default function MovieList() {
       <FlatList
         data={movies}
         renderItem={({item}) => (
-          <View style={styles.item}>
-            <Text style={styles.itemText}>{item.title}</Text>
-          </View>
+          <TouchableOpacity onPress={() => movieclicked(item)}>
+            <View style={styles.item}>
+              <Text style={styles.itemText}>{item.title}</Text>
+            </View>
+          </TouchableOpacity>
         )}
         keyExtractor={(item, index) => index.toString()}
       />

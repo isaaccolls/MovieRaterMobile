@@ -1,26 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
 
-export default function Detail() {
+export default function Detail({ route, navigation }) {
+  const { movie } = route.params;
 
   return (
     <View>
-      <Image
-        source={require('../assets/MR_logo.png')}
-        style={styles.logo}
-        resizeMode="contain"
-      />
-      <FlatList
-        data={movies}
-        renderItem={({item}) => (
-          <TouchableOpacity>
-            <View style={styles.item}>
-              <Text style={styles.itemText}>{item.title}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item, index) => index.toString()}
-      />
+      <Text>Detail about {movie.title}</Text>
     </View>
   );
 }
