@@ -1,8 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, Button } from 'react-native';
 
 export default function MovieList({ navigation }) {
   const [ movies, setMovies ] = useState([]);
+
+  navigation.setOptions({
+    title: "List of movies",
+    headerStyle: {
+      backgroundColor: 'orange',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      fontSize: 18,
+    },
+    headerRight: () => (
+      <Button
+        title="Add new"
+        color="#fff"
+        onPress={() => navigation.navigate("Edit", {movie: {title: '', description: ''}})}
+      />
+    ),
+  });
 
   useEffect(() => {
     fetch('http://192.168.1.81:8000/api/movies/', {

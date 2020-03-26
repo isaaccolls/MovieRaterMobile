@@ -21,20 +21,37 @@ export default function Edit({ route, navigation }) {
   });
 
   const saveMovie = () => {
-    fetch(`http://192.168.1.81:8000/api/movies/${movie.id}/`, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Token 8c667c2fa7048eb4d07aeca5e650b3757ce29220`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({title, description}),
-    })
-    .then(res => res.json())
-    .then(movie => {
-      console.log("movie edited res:", JSON.stringify(movie));
-      navigation.navigate("Detail", {movie: movie});
-    })
-    .catch(error => console.error(error));
+    if (movie.id) {
+      fetch(`http://192.168.1.81:8000/api/movies/${movie.id}/`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Token 8c667c2fa7048eb4d07aeca5e650b3757ce29220`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({title, description}),
+      })
+      .then(res => res.json())
+      .then(movie => {
+        console.log("movie edited res:", JSON.stringify(movie));
+        navigation.navigate("Detail", {movie: movie});
+      })
+      .catch(error => console.error(error));
+    } else {
+      fetch('http://192.168.1.81:8000/api/movies/', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Token 8c667c2fa7048eb4d07aeca5e650b3757ce29220`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({title, description}),
+      })
+      .then(res => res.json())
+      .then(movie => {
+        console.log("movie edited res:", JSON.stringify(movie));
+        navigation.navigate("MovieList");
+      })
+      .catch(error => console.error(error));
+    }
   };
 
   return (
@@ -53,7 +70,7 @@ export default function Edit({ route, navigation }) {
         onChangeText={text => setDescription(text)}
         value={description}
       />
-      <Button onPress={() => saveMovie()} title="Save" />
+      <Button onPress={() => saveMovie()} title={movie.id ? "Edit" : "Save"} />
     </View>
   );
 }
