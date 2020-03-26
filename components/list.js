@@ -33,7 +33,7 @@ export default function MovieList({ navigation }) {
     .then(res => res.json())
     .then(jsonRes => setMovies(jsonRes))
     .catch(error => console.error(error));
-  }, []);
+  });
 
   const movieclicked = (movie) => {
     navigation.navigate("Detail", {movie: movie});
