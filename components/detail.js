@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 export default function Detail({ route, navigation }) {
@@ -27,7 +27,26 @@ export default function Detail({ route, navigation }) {
   });
 
   const rateClicked = () => {
-    console.log("highlight:", highlight);
+    if (highlight > 0 && highlight < 6) {
+      fetch(`http://192.168.1.81:8000/api/movies/${movie.id}/rate_movie/`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Token 8c667c2fa7048eb4d07aeca5e650b3757ce29220`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({stars: highlight}),
+      })
+      .then(res => res.json())
+      .then(res => {
+        // console.log("rate edited res:", JSON.stringify(res));
+        setHighLight(0);
+        Alert.alert("Rating",res.message);
+      })
+      .catch(error => {
+        console.error(error);
+        Alert.alert("Error", error);
+      });
+    }
   };
 
   return (
