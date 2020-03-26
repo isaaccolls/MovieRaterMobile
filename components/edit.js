@@ -18,6 +18,13 @@ export default function Edit({ route, navigation }) {
       fontWeight: 'bold',
       fontSize: 18,
     },
+    headerRight: () => (
+      <Button
+        title="Remove"
+        color="#fff"
+        onPress={() => removeClicled(movie)}
+      />
+    ),
   });
 
   const saveMovie = () => {
@@ -52,6 +59,21 @@ export default function Edit({ route, navigation }) {
       })
       .catch(error => console.error(error));
     }
+  };
+
+  const removeClicled = movie => {
+    // console.log(movie);
+    fetch(`http://192.168.1.81:8000/api/movies/${movie.id}/`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Token 8c667c2fa7048eb4d07aeca5e650b3757ce29220`,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(res => {
+        navigation.navigate("MovieList");
+      })
+      .catch(error => console.error(error));
   };
 
   return (
