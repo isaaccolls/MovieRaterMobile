@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
 
 export default function MovieList({ navigation }) {
-
   const [ movies, setMovies ] = useState([]);
 
   useEffect(() => {
