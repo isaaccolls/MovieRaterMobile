@@ -9,7 +9,20 @@ export default function Edit({ route, navigation }) {
   const [ description, setDescription ] = useState(movie.description);
 
   const saveMovie = () => {
-    navigation.goBack();
+    fetch(`http://192.168.1.81:8000/api/movies/${movie.id}/`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Token 8c667c2fa7048eb4d07aeca5e650b3757ce29220`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({title, description}),
+    })
+    .then(res => res.json())
+    .then(movie => {
+      console.log("movie edited res:", JSON.stringify(movie));
+      navigation.navigate("Detail", {movie: movie});
+    })
+    .catch(error => console.error(error));
   };
 
   navigation.setOptions({
@@ -30,14 +43,14 @@ export default function Edit({ route, navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Title"
-        onChange={text => setTitle(text)}
+        onChangeText={text => setTitle(text)}
         value={title}
       />
       <Text style={styles.label}>Description</Text>
       <TextInput
         style={styles.input}
         placeholder="Description"
-        onChange={text => setDescription(text)}
+        onChangeText={text => setDescription(text)}
         value={description}
       />
       <Button onPress={() => saveMovie()} title="Save" />

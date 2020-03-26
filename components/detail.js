@@ -25,7 +25,6 @@ export default function Detail({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>{movie.title}</Text>
       <View style={styles.starContainer}>
         <FontAwesomeIcon style={movie.avg_rating > 0 ? styles.orange : styles.white} icon={["fas","star"]} />
         <FontAwesomeIcon style={movie.avg_rating > 1 ? styles.orange : styles.white} icon={["fas","star"]} />
