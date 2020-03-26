@@ -3,7 +3,9 @@ import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 export default function Detail({ route, navigation }) {
-  const { movie } = route.params;
+  const { movie, token } = route.params;
+  console.log(JSON.stringify(route.params));
+  console.log("details token:", token);
 
   const [ highlight, setHighLight ] = useState(0);
 
