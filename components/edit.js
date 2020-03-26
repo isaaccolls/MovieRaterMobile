@@ -8,6 +8,18 @@ export default function Edit({ route, navigation }) {
   const [ title, setTitle ] = useState(movie.title);
   const [ description, setDescription ] = useState(movie.description);
 
+  navigation.setOptions({
+    title: movie.title,
+    headerStyle: {
+      backgroundColor: 'orange',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      fontSize: 18,
+    },
+  });
+
   const saveMovie = () => {
     fetch(`http://192.168.1.81:8000/api/movies/${movie.id}/`, {
       method: 'PUT',
@@ -24,18 +36,6 @@ export default function Edit({ route, navigation }) {
     })
     .catch(error => console.error(error));
   };
-
-  navigation.setOptions({
-    title: movie.title,
-    headerStyle: {
-      backgroundColor: 'orange',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-      fontSize: 18,
-    },
-  });
 
   return (
     <View style={styles.container}>

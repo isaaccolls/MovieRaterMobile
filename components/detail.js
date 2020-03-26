@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 export default function Detail({ route, navigation }) {
   const { movie } = route.params;
 
+  const [ highlight, setHighLight ] = useState(0);
+
   navigation.setOptions({
     title: movie.title,
     headerStyle: {
@@ -19,9 +21,14 @@ export default function Detail({ route, navigation }) {
       <Button
         title="Edit"
         color="#fff"
-        onPress={() => navigation.navigate("Edit", {movie: movie})}/>
+        onPress={() => navigation.navigate("Edit", {movie: movie})}
+      />
     ),
   });
+
+  const rateClicked = () => {
+    console.log("highlight:", highlight);
+  };
 
   return (
     <View style={styles.container}>
@@ -34,6 +41,16 @@ export default function Detail({ route, navigation }) {
         <Text style={styles.white}>({movie.no_of_ratings})</Text>
       </View>
       <Text style={styles.description}>{movie.description}</Text>
+      <View style={{borderBottomColor: '#fff', borderBottomWidth: 2}} />
+      <Text style={styles.description}>Rate it..!!</Text>
+      <View style={styles.starContainer}>
+        <FontAwesomeIcon style={highlight > 0 ? styles.purple : styles.grey} icon={["fas","star"]} size={48} onPress={() => setHighLight(1)} />
+        <FontAwesomeIcon style={highlight > 1 ? styles.purple : styles.grey} icon={["fas","star"]} size={48} onPress={() => setHighLight(2)} />
+        <FontAwesomeIcon style={highlight > 2 ? styles.purple : styles.grey} icon={["fas","star"]} size={48} onPress={() => setHighLight(3)} />
+        <FontAwesomeIcon style={highlight > 3 ? styles.purple : styles.grey} icon={["fas","star"]} size={48} onPress={() => setHighLight(4)} />
+        <FontAwesomeIcon style={highlight > 4 ? styles.purple : styles.grey} icon={["fas","star"]} size={48} onPress={() => setHighLight(5)} />
+      </View>
+      <Button title="Rate" onPress={() => rateClicked()} />
     </View>
   );
 }
@@ -58,5 +75,11 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 20,
     color: '#fff'
+  },
+  purple: {
+    color: 'purple',
+  },
+  grey: {
+    color: '#ccc',
   },
 });
