@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, Button, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Image, Button, AsyncStorage, TouchableOpacity } from 'react-native';
 
 export default function MovieList({ navigation }) {
   const [ movies, setMovies ] = useState([]);
@@ -50,7 +50,7 @@ export default function MovieList({ navigation }) {
   };
 
   let movieclicked = movie => {
-    // console.log("movieclicked token:", token); 🙃
+    // console.log("movieclicked token:", token);// 🙃
     navigation.navigate("Detail", {movie});
   };
 
