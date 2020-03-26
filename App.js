@@ -1,4 +1,5 @@
 import React from 'react';
+import Auth from './components/auth';
 import MovieList from './components/list';
 import Detail from './components/detail';
 import Edit from './components/edit';
@@ -14,6 +15,7 @@ function App() {
   return (
     <NavigationContainer>
       <AppNavigator.Navigator>
+        <AppNavigator.Screen name="Auth" component={Auth} />
         <AppNavigator.Screen name="MovieList" component={MovieList} />
         <AppNavigator.Screen name="Detail" component={Detail} />
         <AppNavigator.Screen name="Edit" component={Edit} />
